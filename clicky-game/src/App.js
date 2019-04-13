@@ -11,7 +11,8 @@ class App extends Component {
 		images,
 		alreadyClicked: [],
 		correct: true,
-		score: 0
+		score: 0,
+		topScore: 0
 	}
 
 	handleOnClick = (event) => {
@@ -23,6 +24,12 @@ class App extends Component {
 				imageClass: 'click-item shake',
 				correct: false
 			});
+			if(this.state.score > this.state.topScore) {
+				this.setState({ topScore: this.state.score})
+			}
+
+			this.setState({ score: 0 })
+
 		} else {
 			this.state.alreadyClicked.push(id);
 			console.log(this.state.alreadyClicked);
@@ -42,6 +49,7 @@ class App extends Component {
 				<Header
 					correct={this.state.correct}
 					score={this.state.score}
+					topScore={this.state.topScore}
 				/>
 				<Body
 					handleOnClick={this.handleOnClick}

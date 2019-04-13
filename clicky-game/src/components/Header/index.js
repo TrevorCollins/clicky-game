@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
+import './header.css';
 
-class Header extends Component {
+function Header(props) {
+    return (
+        <div id="header">
+            <Navbar
+                correctGuess={props.correct}
+                score={props.score}
+                topScore={props.topScore}
+            />
+            <Title />
+        </div>
+    )
 
-    render() {
-        return (
-            <div>
-                <Navbar correctGuess={this.props.correct} score={this.props.score} />
-                <Title />
-            </div>
-        )
-    }
 };
 
-function Navbar({ correctGuess, score }) {
+function Navbar({ correctGuess, score, topScore }) {
     return (
         <nav className='navbar navbar-dark bg-dark'>
             <ul>
@@ -23,7 +26,7 @@ function Navbar({ correctGuess, score }) {
                     {correctGuess ? 'You guessed Correctly!' : 'You guessed Incorrectly'}
                 </li>
                 <li name="score">
-                    Score: {score}
+                    Score: {score} || Top Score: {topScore}
                 </li>
             </ul>
         </nav>
@@ -31,10 +34,11 @@ function Navbar({ correctGuess, score }) {
 };
 
 function Title() {
-    return(
+    return (
         <div className="header">
             <h1>Game of Clicks</h1>
-            <h2>The North remembers. Do you?</h2>
+            <h2>The North remembers.<br/><br/>Do you?</h2>
+            <br/>
             <h4>Click on an image to earn points, but don't click it one more than once!</h4>
         </div>
     )
